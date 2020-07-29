@@ -16,6 +16,7 @@ import Days16 from './Components/ui/Days16'
 import SearchWeather from './Components/ui/SearchWeather'
 import denkaIMG from './img/denkatech.png'
 
+
 function App() {
 
   const [isOpen, setIsOpen] = useState(false);

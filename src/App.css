@@ -4,3 +4,8 @@
     margin-bottom: 10px;
     width: 40rem;
 }
+
+.weatherImg {
+    width: 100px;
+    height: 150px;
+}

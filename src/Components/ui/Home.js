@@ -5,6 +5,7 @@ import {
     Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle, Button, Spinner, Container
 } from 'reactstrap';
+import weatherimg from '../../img/weather.jpg'
 
 // a33368b2381c90cc3499f94f1d4a2d97 (api key for weatherstack)
 // http://api.weatherstack.com/current?access_key=a33368b2381c90cc3499f94f1d4a2d97query=London
@@ -62,6 +63,7 @@ const Home = () => {
                     wind_speed,
                     description, 
                     icons })
+                console.log("PERIOD", is_day)
                 setData(apiResponse)
             }).catch(error => {
                 console.log(error);
@@ -81,14 +83,16 @@ const Home = () => {
         return (
             <Container>
                 <Card className="card">
+                    <CardImg className="weatherImg" top width="100%" src={weatherimg} alt="Card image cap" />
                     <CardBody>
                         <CardTitle>Current weather information</CardTitle>
+                        <hr></hr>
                         <CardSubtitle>{weatherData.description}</CardSubtitle>
                         <CardText>Cloudcover : {weatherData.cloudcover}%</CardText>
+                        <CardText><img src={weatherData.icons} alt="Weather" /></CardText>
                         <CardText>Temperature : {weatherData.temperature}°C/</CardText>
                         <CardText>Feels like : {weatherData.feelslike}°C</CardText>
-                        <CardText><img src={weatherData.icons} alt="Weather" /></CardText>
-                        <Button>Button</Button>
+                        <CardText> {weatherData.is_day==="yes" ? <div>Day</div>: <div>Night</div>}</CardText>
                     </CardBody>
                 </Card>
             </Container>
