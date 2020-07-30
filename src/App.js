@@ -35,7 +35,7 @@ function App() {
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
             <NavItem>
-              <Link style={{ color: 'white' }} to="/">Home</Link>
+              <Link style={{ color: 'white' }} to="/">Current weather</Link>
             </NavItem><div> | </div>
             <NavItem>
               <Link style={{ color: 'white' }} to="/day16"> 16 Day prevision</Link>
