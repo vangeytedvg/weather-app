@@ -1,26 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/png" href="./images/logo.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta name="description" content="Modern PWA Weather React Application" />
-    <link rel="apple-touch-icon" href="./images/logo.png" />
-    <link rel="manifest" href="./manifest.json"/>
-    <title>Weather App</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <script>
-        if('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./serviceworker.js')
-                    .then((reg) => console.log('Success: ', reg.scope))
-                    .catch((err) => console.log('Failure: ', err));
-            })
-        }
-    </script>
-  </body>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="icon" type="image/png" href="./images/logo.png" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#000000" />
+        <meta
+            name="description"
+            content="Modern PWA Weather React Application"
+        />
+        <link rel="apple-touch-icon" href="./images/logo.png" />
+        <link rel="manifest" href="./manifest.json" />
+        <title>DenkaTech Weather</title>
+        <style type="text/css">
+            body {
+                background-color: dimgrey;
+            }
+            .city-name, .city-part {
+                font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            }
+            .container-offline {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-evenly;
+                align-items: center;
+                text-align: center;
+                min-height: 100vh;
+            }
+            .trouble {
+                margin: 150px auto;
+                width: 80%;
+                padding: 40px 8%;
+                border-radius: 20px;
+                background: #fff;
+            }
+            .city-name-offline {
+                display: flex;
+                background-color: dodgerblue;
+                width: 600px;
+                height: 200px;
+                border-radius: 30px;
+                font-size: 30px;
+                font-weight: bold;
+                justify-content: center;
+                align-items: center;
+                align-content: center;
+            }
+            .city-part {
+                display: flex;
+                background-color: red;
+                width: 600px;
+                height: 200px;
+                font-size: 30px;
+                font-weight: bold;
+                justify-content: center;
+                align-items: center;
+                align-content: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="root">
+            <div class="container-offline">
+              <div class="city-part">
+                Could not connect to the weather server...
+            </div>   
+              <div class="city-name-offline">
+                    Please go online to check the weather!
+                </div>
+            </div>
+        </div>
+        <script>
+            if ("serviceWorker" in navigator) {
+                window.addEventListener("load", function () {
+                    navigator.serviceWorker
+                        .register("worker.js")
+                        .then(
+                            function (registration) {
+                                console.log(
+                                    "Worker registration successful",
+                                    registration.scope
+                                );
+                            },
+                            function (err) {
+                                console.log("Worker registration failed", err);
+                            }
+                        )
+                        .catch(function (err) {
+                            console.log(err);
+                        });
+                });
+            } else {
+                console.log("Service Worker is not supported by browser.");
+            }
+        </script>
+    </body>
 </html>

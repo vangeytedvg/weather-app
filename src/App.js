@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { getCardinal } from './utils/WindDirections'
-
+import { getCardinal } from "./utils/WindDirections";
 import { fetchWeather } from "./api/fetchWeather";
 import "./App.css";
 
@@ -11,9 +10,8 @@ const App = () => {
     const search = async (e) => {
         if (e.key === "Enter") {
             const data = await fetchWeather(query);
-            console.log(data);
             setWeather(data);
-            setQuery("");
+            //setQuery("");
         }
     };
 
@@ -27,6 +25,10 @@ const App = () => {
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyPress={search}
             />
+            <div className="remember">
+                <input type="checkbox" id="remember" value=""/>
+                <label className="remember-label" htmlFor="remember">Remember location</label>
+            </div>
             {weather.main && (
                 <div className="flip-card">
                     <div className="flip-card-inner">
@@ -71,6 +73,42 @@ const App = () => {
                                 <span className="info-label">
                                     {weather.main.pressure}
                                     <sup>hPa</sup>
+                                </span>
+                            </div>
+                            <div className="feels-like">
+                                Wind direction{" "}
+                                <span className="info-label">
+                                    {getCardinal(weather.wind.direction)}
+                                </span>
+                            </div>
+                            <div className="feels-like">
+                                Wind speed{" "}
+                                <span className="info-label">
+                                    {weather.wind.speed}
+                                    <sup>km/h</sup>
+                                </span>
+                            </div>
+                            <div className="feels-like">
+                                Visibility{" "}
+                                <span className="info-label">
+                                    {weather.visibility / 1000}
+                                    <sup>km</sup>
+                                </span>
+                            </div>
+                            <div className="feels-like">
+                                Sunrise{" "}
+                                <span className="info-label">
+                                    {new Date(
+                                        weather.sys.sunrise * 1000
+                                    ).toLocaleTimeString()}
+                                </span>
+                            </div>
+                            <div className="feels-like">
+                                Sunrise{" "}
+                                <span className="info-label">
+                                    {new Date(
+                                        weather.sys.sunset * 1000
+                                    ).toLocaleTimeString()}
                                 </span>
                             </div>
                         </div>

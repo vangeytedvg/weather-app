@@ -36,10 +36,11 @@ body,
 .remember {
     display: flex;
     align-items: center;
+    margin-bottom: 25px;
 }
 
 .remember-label {
-    color:white;
+    color: white;
     margin-left: 5px;
 }
 
@@ -50,7 +51,15 @@ body,
     flex-direction: column;
     padding: 40px 8%;
     border-radius: 20px;
-    background: rgba(250, 250, 250, 0.85);
+    background: rgb(34, 195, 70);
+    background: linear-gradient(
+        0deg,
+        rgba(34, 195, 70, 1) 2%,
+        rgba(72, 217, 51, 1) 36%,
+        rgba(93, 229, 41, 1) 55%,
+        rgba(92, 253, 45, 1) 70%,
+        rgba(45, 253, 155, 1) 93%
+    );
     box-shadow: 10px 10px 5px 0px rgba(15, 15, 15, 0.404);
 }
 
@@ -202,8 +211,12 @@ p {
 .info-label {
     position: relative;
     display: inline-block;
-    background-color: rgb(32, 177, 104); /*for compatibility with older browsers*/
-    background-image: linear-gradient( rgb(8, 150, 107), rgb(11, 53, 32));
+    background-color: rgb(
+        32,
+        177,
+        104
+    ); /*for compatibility with older browsers*/
+    background-image: linear-gradient(rgb(8, 150, 107), rgb(11, 53, 32));
     box-shadow: 4px 4px 4px 0px rgba(15, 15, 15, 0.404);
     color: white;
     font-size: 17px;
@@ -215,13 +228,13 @@ p {
     border-radius: 15px;
 }
 
-.info-label:after{
-	position: absolute;
-	top: 2px;
-	left: 2px;
-	width: calc(100% - 4px);
-	height: 50%;
-	background: linear-gradient(rgba(25, 139, 60, 0.8), rgb(8, 255, 135));
+.info-label:after {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: calc(100% - 4px);
+    height: 50%;
+    background: linear-gradient(rgba(25, 139, 60, 0.8), rgb(8, 255, 135));
 }
 
 .card-back-title {

@@ -1,6 +1,6 @@
 {
-    "short_name": "Weather App",
-    "name": "Weather App PWA",
+    "short_name": "Denkatech Weather App",
+    "name": "Denkatech Weather",
     "icons": [
         {
             "src": "/images/logo.png",
