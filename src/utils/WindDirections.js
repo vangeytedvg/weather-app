@@ -1,25 +1,39 @@
-/** 
- * Given "0-360" returns the nearest cardinal direction "N/NE/E/SE/S/SW/W/NW"  
+/**
+ * Given "0-360" returns the nearest cardinal direction "N/NE/E/SE/S/SW/W/NW"
  */
-export function getCardinal(angle) {
-    /** 
-     * Customize by changing the number of directions you have
-     * We have 8
-     */
-    const degreePerDirection = 360 / 8;
-  
-    /** 
-     * Offset the angle by half of the degrees per direction
-     * Example: in 4 direction system North (320-45) becomes (0-90)
-     */
-    const offsetAngle = angle + degreePerDirection / 2;
-  
-    return (offsetAngle >= 0 * degreePerDirection && offsetAngle < 1 * degreePerDirection) ? "N"
-      : (offsetAngle >= 1 * degreePerDirection && offsetAngle < 2 * degreePerDirection) ? "NE"
-        : (offsetAngle >= 2 * degreePerDirection && offsetAngle < 3 * degreePerDirection) ? "E"
-          : (offsetAngle >= 3 * degreePerDirection && offsetAngle < 4 * degreePerDirection) ? "SE"
-            : (offsetAngle >= 4 * degreePerDirection && offsetAngle < 5 * degreePerDirection) ? "S"
-              : (offsetAngle >= 5 * degreePerDirection && offsetAngle < 6 * degreePerDirection) ? "SW"
-                : (offsetAngle >= 6 * degreePerDirection && offsetAngle < 7 * degreePerDirection) ? "W"
-                  : "NW";
-  }
+export function getCardinal(deg) {
+  console.log("From getCardinal", deg)
+    if (deg > 11.25 && deg < 33.75) {
+        return "NNE";
+    } else if (deg > 33.75 && deg < 56.25) {
+        return "ENE";
+    } else if (deg > 56.25 && deg < 78.75) {
+        return "E";
+    } else if (deg > 78.75 && deg < 101.25) {
+        return "ESE";
+    } else if (deg > 101.25 && deg < 123.75) {
+        return "ESE";
+    } else if (deg > 123.75 && deg < 146.25) {
+        return "SE";
+    } else if (deg > 146.25 && deg < 168.75) {
+        return "SSE";
+    } else if (deg > 168.75 && deg < 191.25) {
+        return "S";
+    } else if (deg > 191.25 && deg < 213.75) {
+        return "SSW";
+    } else if (deg > 213.75 && deg < 236.25) {
+        return "SW";
+    } else if (deg > 236.25 && deg < 258.75) {
+        return "WSW";
+    } else if (deg > 258.75 && deg < 281.25) {
+        return "W";
+    } else if (deg > 281.25 && deg < 303.75) {
+        return "WNW";
+    } else if (deg > 303.75 && deg < 326.25) {
+        return "NW";
+    } else if (deg > 326.25 && deg < 348.75) {
+        return "NNW";
+    } else {
+        return "N";
+    }
+}

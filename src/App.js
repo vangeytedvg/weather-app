@@ -1,22 +1,51 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { getCardinal } from "./utils/WindDirections";
 import { fetchWeather } from "./api/fetchWeather";
+import cookie from 'react-cookies'
+
 import "./App.css";
 
 const App = () => {
     const [query, setQuery] = useState("");
     const [weather, setWeather] = useState({});
+    // Used for storing the current selected location
+    const [remember, setRemember] = useState(false)
+    const [storedLocation, setStoredLocation] = useState('')
 
     const search = async (e) => {
         if (e.key === "Enter") {
             const data = await fetchWeather(query);
             setWeather(data);
-            //setQuery("");
+            console.log(data)
+            setQuery('')
+            setRemember(false)
         }
     };
 
+    const rememberLocation = (e) => {
+        // Store the location as a cookie
+        setRemember(e.target.checked)
+        // Store the default location as a cookie
+        setStoredLocation(query)
+        cookie.save("default_weather_location", query)
+    }
+
+    useEffect(() => {
+        const myLocation =  cookie.load('default_weather_location')
+        if (myLocation) {
+            setStoredLocation(myLocation)
+            console.log(myLocation)
+            setRemember(true)
+            setQuery(myLocation)
+        } else {
+            console.log("No location stored")
+            setRemember(false)
+        }
+
+    }, [])
+
     return (
-        <div className="main-container">
+        <div className="main-container">    
             <input
                 type="text"
                 className="search"
@@ -24,9 +53,10 @@ const App = () => {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyPress={search}
+                autoFocus
             />
             <div className="remember">
-                <input type="checkbox" id="remember" value=""/>
+                <input type="checkbox" onChange={rememberLocation} checked={remember}/>
                 <label className="remember-label" htmlFor="remember">Remember location</label>
             </div>
             {weather.main && (
@@ -78,7 +108,7 @@ const App = () => {
                             <div className="feels-like">
                                 Wind direction{" "}
                                 <span className="info-label">
-                                    {getCardinal(weather.wind.direction)}
+                                    {getCardinal(weather.wind.deg)}
                                 </span>
                             </div>
                             <div className="feels-like">
@@ -104,7 +134,7 @@ const App = () => {
                                 </span>
                             </div>
                             <div className="feels-like">
-                                Sunrise{" "}
+                                Sunset{" "}
                                 <span className="info-label">
                                     {new Date(
                                         weather.sys.sunset * 1000
